@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="/css/style.css" />
+    <title><%= title %></title>
+  </head>
+  <body>
+    <div class="createUser">
+      <form action="/user" method="POST">
+        <input type="text" name="id" placeholder="id" />
+        <input type="text" name="name" placeholder="name" />
+        <input type="text" name="email" placeholder="email" />
+        <input type="text" name="address" placeholder="address" />
+        <input type="text" name="phone" placeholder="address" />
+        <input type="text" name="website" placeholder="website" />
+        <input type="text" name="company" placeholder="company" />
+        <input type="submit" />
+      </form>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>City</th>
+          <th>Phone</th>
+          <th>website</th>
+          <th>Company</th>
+          <th>Operations</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- اگر کد جاوااسکریپتی بود با این سینتکس باید در ejs بنویسیم -->
+        <% users.map((user)=>{ %>
+        <tr>
+          <!-- اگر دیتای متنی بود با این سینتکس باید بنویسیم -->
+          <td><%= user.id %></td>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.address.city %></td>
+          <td><%= user.phone %></td>
+          <td>
+            <a
+              href="https://<%= user.website %>"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <%= user.website %>
+            </a>
+          </td>
+          <td><%= user.company.name %></td>
+          <td>
+            <form action="/user/<%= user.id %>?method=DELETE" method="POST">
+              <input type="submit" value="remove" />
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </body>
+</html>
