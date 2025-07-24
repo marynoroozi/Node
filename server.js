@@ -4,6 +4,8 @@ const methodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport = require("passport");
+const MongoStore = require("connect-mongo");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -30,16 +32,26 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
+    //expires in 100 days
+    cookie: { expires: new Date(Date.now() + 1000 * 3600 * 24 * 100) },
+    store: MongoStore.create({
+      mongoUrl: "mongodb://127.0.0.1:27017/nodeStart",
+    }),
   })
 );
 app.use(flash());
 
+require("./passport/passport-local");
+app.use(passport.initialize());
+app.use(passport.session());
+
 // set view
 app.set("view engine", "ejs");
 
-// middleware 1
 app.use((req, res, next) => {
-  console.log("mid1");
+  // passport let use to access the user data in req
+  // console.log(req.user);
+  res.locals = { errors: req.flash("errors"), req };
   next();
 });
 
@@ -47,14 +59,8 @@ app.get("/", (req, res) => {
   res.render("index");
 });
 
-// middleware 2
-app.use((req, res, next) => {
-  console.log("mid2");
-  next();
-});
-
 // اینجا آدرس ها را میتونیم راحت مدیریت کنیم که روی کدوم روت باشه
-app.use("/user", require("./routes/user"));
+app.use("/", require("./routes/index"));
 
 app.listen(config.port, () => {
   console.log(`server is running on port ${config.port}`);
