@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const userSchem = new Schema({
   name: { type: String, required: true },
-  username: { type: String, required: true },
+  password: { type: String, required: true },
   email: { type: String, required: true, match: /.+\@.+\..+/ },
   address: {
     street: { type: String },

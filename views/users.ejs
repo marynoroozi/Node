@@ -16,11 +16,11 @@
 
     <div class="createUser">
       <form action="/user" method="POST">
-        <input type="text" name="id" placeholder="id" />
         <input type="text" name="name" placeholder="name" />
         <input type="text" name="email" placeholder="email" />
+        <input type="text" name="password" placeholder="password" />
         <input type="text" name="address" placeholder="address" />
-        <input type="text" name="phone" placeholder="address" />
+        <input type="text" name="phone" placeholder="phone" />
         <input type="text" name="website" placeholder="website" />
         <input type="text" name="company" placeholder="company" />
         <input type="submit" />
@@ -32,6 +32,7 @@
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
+          <th>password</th>
           <th>City</th>
           <th>Phone</th>
           <th>website</th>
@@ -47,6 +48,7 @@
           <td><%= user.id %></td>
           <td><%= user.name %></td>
           <td><%= user.email %></td>
+          <td><%= user.password %></td>
           <td><%= user.address.city %></td>
           <td><%= user.phone %></td>
           <td>
