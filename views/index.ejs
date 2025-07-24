@@ -3,6 +3,11 @@
     <link rel="stylesheet" href="/css/style.css" />
   </head>
   <body>
+    <% if(req.isAuthenticated()){ %>
+    <a href="/dashboard">dashboard</a>
+    <% }else{ %>
+    <a href="/auth/register">Register</a>
+    <% } %>
     <h1>Home Page</h1>
   </body>
 </html>
