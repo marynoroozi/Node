@@ -1,4 +1,19 @@
+<%- include('../components/validationError') -%>
 <h1>Dashboard</h1>
+<img
+  src="<%= req.user.img %>"
+  style="width: 150px; border-radius: 50%"
+  alt="<%= req.user.name %>"
+/>
 <h3>Hi <%= req.user.name %></h3>
-
+<form action="/dashboard/editUser" method="POST" enctype="multipart/form-data">
+  <input
+    type="text"
+    placeholder="name"
+    name="name"
+    value="<%= req.user.name %>"
+  />
+  <input type="file" name="img" />
+  <input type="submit" value="send" />
+</form>
 <a href="/logout">logout</a>

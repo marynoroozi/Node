@@ -13,7 +13,7 @@ require("dotenv").config();
 // require("app-module-path").addPath(__dirname + /yourDesiredFolder);
 require("app-module-path").addPath(__dirname);
 
-mongoose.connect("mongodb://127.0.0.1:27017/nodeStart");
+mongoose.connect("mongodb://127.0.0.1:27017/node");
 
 global.config = require("./config");
 
@@ -35,7 +35,7 @@ app.use(
     //expires in 100 days
     cookie: { expires: new Date(Date.now() + 1000 * 3600 * 24 * 100) },
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/nodeStart",
+      mongoUrl: "mongodb://127.0.0.1:27017/node",
     }),
   })
 );
