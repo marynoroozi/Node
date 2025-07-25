@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 const userSchem = new Schema({
   name: { type: String, required: true },
   password: { type: String, required: true },
+  img: { type: String },
   email: { type: String, required: true, match: /.+\@.+\..+/ },
   address: {
     street: { type: String },
